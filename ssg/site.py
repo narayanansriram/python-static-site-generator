@@ -1,4 +1,3 @@
-from os import mkdir
 from pathlib import Path
 
 class Site():
@@ -7,11 +6,11 @@ class Site():
         self.dest = Path(dest)
     
     def create_dir(self,path):
-        directory = self.dest + '/' + path.relative_to(path)
-        mkdir(directory, parents=True, exist_ok=True)
+        directory = self.dest / path.relative_to(path)
+        self.dest.mkdir(directory, parents=True, exist_ok=True)
 
     def build(self):
-        mkdir(self.dest, parents=True, exists_ok=True)
+        self.dest.mkdir(parents=True, exists_ok=True)
 
         for path in self.source.rglob('*'):
             if path.isdir():
